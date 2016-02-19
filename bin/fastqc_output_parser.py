@@ -41,7 +41,7 @@ per_seq_qual_bucket_size = 5
 per_seq_qual_bucket_prefix = 'per_seq_qual_prop_seqs_'
 
 
-def main(_):
+def main():
     parser = argparse.ArgumentParser()
     parser.add_argument('fastqc_output_dir', type=str, help='fastqc output dir')
     parser.add_argument('output_tsv', type=str, help='output TSV path')
