@@ -1,9 +1,14 @@
 import argparse
-import os.path
+import glob
+import os
 
 import numpy as np
+import pandas as ps
 
 from fadapa import Fadapa
+
+fastqc_output_dir_name = 'stdin_fastqc'
+fastqc_output_file_name = 'fastqc_data.txt'
 
 fastqc_basic_stats_name = 'Basic Statistics'
 fastqc_dup_levels_name = 'Sequence Duplication Levels'
@@ -34,6 +39,33 @@ per_base_qual_mean_max_name = 'per_base_qual_mean_max'
 
 per_seq_qual_bucket_size = 5
 per_seq_qual_bucket_prefix = 'per_seq_qual_prop_seqs_'
+
+
+def main(_):
+    parser = argparse.ArgumentParser()
+    parser.add_argument('fastqc_output_dir', type=str, help='fastqc output dir')
+    parser.add_argument('output_tsv', type=str, help='output TSV path')
+    args = parser.parse_args()
+
+    fastqc_runs = glob.glob(args.fastqc_output_dir + '/*')
+    fastqc_run_names = map(os.path.basename, fastqc_runs)
+
+    fastqc_rel_filepath = os.path.join(fastqc_output_dir_name, fastqc_output_file_name)
+    fastqc_output_files = map(lambda r: os.path.join(r, fastqc_rel_filepath), fastqc_runs)
+
+    rows = {}
+    for fastqc_output_file, fastqc_run_name in zip(fastqc_output_files, fastqc_run_names):
+        stats = get_stats_from_fastqc_file(fastqc_output_file)
+        rows[fastqc_run_name] = stats
+
+    cols = sorted(rows.values()[0].keys())
+    table = {k: [] for k in rows.keys()}
+    for c in cols:
+        for k in rows.keys():
+            table[k].append(rows[k][c])
+
+    df = ps.DataFrame.from_dict(table, orient='index')
+    df.to_csv(args.output_tsv, sep='\t')
 
 
 def fadapa_from_filepath(filepath):
@@ -102,3 +134,6 @@ def get_stats_from_fastqc_file(filepath):
     stats.update(seq_qual_hist)
 
     return stats
+
+if __name__ == '__main__':
+    main()
