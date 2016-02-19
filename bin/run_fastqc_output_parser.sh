@@ -8,7 +8,7 @@ source /users/cprobert/.bashrc
 source /users/cprobert/dev/gecco-rna/bin/project_paths.sh
 
 export fastqc_output_dir="${PROJECT_ANALYSIS_BASE_DIR}/fastqc/"
-export fastqc_output_summary="${fastqc_output_dir}/fastqc_all_samples.tsv"
+export fastqc_output_summary="${PROJECT_SOURCE_BASE_DIR}/data/fastqc_all_samples.tsv"
 
 export fastqc_output_zips="$(ls ${fastqc_output_dir}*/stdin_fastqc.zip)"
 
