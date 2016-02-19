@@ -16,6 +16,7 @@ fastqc_per_base_qual_name = 'Per base sequence quality'
 fastqc_per_seq_qual_name = 'Per sequence quality scores'
 
 fastqc_basic_stats_keys = [
+    ('Total Sequences', 'total_num_seqs'),
     ('Sequences flagged as poor quality', 'num_seqs_flagged_poor_qual'),
     ('Sequence length', 'seq_length'),
     ('%GC', 'percent_gc')
