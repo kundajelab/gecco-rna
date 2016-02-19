@@ -57,8 +57,9 @@ def main():
 
     rows = {}
     for fastqc_output_file, fastqc_run_name in zip(fastqc_output_files, fastqc_run_names):
-        stats = get_stats_from_fastqc_file(fastqc_output_file)
-        rows[fastqc_run_name] = stats
+        if os.path.exists(fastqc_output_file):
+            stats = get_stats_from_fastqc_file(fastqc_output_file)
+            rows[fastqc_run_name] = stats
 
     cols = sorted(rows.values()[0].keys())
     table = {k: [] for k in rows.keys()}
