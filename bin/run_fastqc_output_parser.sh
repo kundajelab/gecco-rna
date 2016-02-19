@@ -14,7 +14,7 @@ export fastqc_output_zips="$(ls ${fastqc_output_dir}*/stdin_fastqc.zip)"
 
 for fastqc_output_zip in $fastqc_output_zips; do
     export outpath="$(dirname $fastqc_output_zip)/"
-    unzip -o $fastqc_output_zip -d $outpath
+    unzip -f $fastqc_output_zip -d $outpath
 done;
 
 export fastqc_parse_exec="${PROJECT_SOURCE_BASE_DIR}/bin/fastqc_output_parser.py"
