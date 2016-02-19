@@ -37,6 +37,8 @@ per_base_qual_mean_name = 'per_base_qual_mean'
 per_base_qual_mean_min_name = 'per_base_qual_mean_min'
 per_base_qual_mean_max_name = 'per_base_qual_mean_max'
 
+per_seq_qual_bucket_min = 0
+per_seq_qual_bucket_max = 60
 per_seq_qual_bucket_size = 5
 per_seq_qual_bucket_prefix = 'per_seq_qual_prop_seqs_'
 
@@ -84,8 +86,8 @@ def build_seq_qual_histogram(per_seq_quals):
     per_seq_quals = {int(k): float(v[0]) for k, v in per_seq_quals.items()}
     total_seqs = sum(per_seq_quals.values())
     prop_per_seq_quals = {k: v / total_seqs for k, v in per_seq_quals.items()}
-    min_qual = min(prop_per_seq_quals.keys())
-    max_qual = max(prop_per_seq_quals.keys())
+    min_qual = per_seq_qual_bucket_min
+    max_qual = per_seq_qual_bucket_max
     c_qual = min_qual
     hist = {}
     while c_qual <= max_qual:
