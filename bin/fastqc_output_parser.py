@@ -67,6 +67,7 @@ def main():
             table[k].append(rows[k][c])
 
     df = ps.DataFrame.from_dict(table, orient='index')
+    df.columns = cols
     df.to_csv(args.output_tsv, sep='\t')
 
 
