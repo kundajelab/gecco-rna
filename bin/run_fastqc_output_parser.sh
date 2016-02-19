@@ -13,7 +13,7 @@ export fastqc_output_summary="${fastqc_output_dir}/parsed_output.tsv"
 export fastqc_output_zips="$(ls ${fastqc_output_dir}*/stdin_fastqc.zip)"
 
 for fastqc_output_zip in $fastqc_output_zips; do
-    export outpath=$(dirname fastqc_output_zip)
+    export outpath="$(dirname $fastqc_output_zip)/"
     unzip -o $fastqc_output_zip -d $outpath
 done;
 
