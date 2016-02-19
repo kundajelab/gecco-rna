@@ -117,7 +117,7 @@ def get_stats_from_fastqc_file(filepath):
         stats[out_key] = basic_stats[fq_key][0]
 
     for fq_key, out_key in fastqc_dup_levels_keys:
-        stats[out_key] = dup_levels[fq_key]
+        stats[out_key] = dup_levels[fq_key][0]
 
     for d_level in fastqc_dup_levels:
         dups = dup_levels[d_level]
