@@ -11,6 +11,9 @@ export PROJECT_READS_BATCH_DIR_NAMES=$(ls ${PROJECT_READS_BASE_DIR} | grep batch
 # Base directory for analysis source code
 export PROJECT_SOURCE_BASE_DIR="${HOME}/dev/gecco-rna/"
 
+# Base directory for project executable files
+export PROJECT_BIN="${PROJECT_SOURCE_BASE_DIR}/bin/"
+
 # Path to sample file, which lists all files and samples by sample
 export PROJECT_SAMPLE_FILE="${PROJECT_SOURCE_BASE_DIR}/data/VM_stats.csv"
 
