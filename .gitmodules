@@ -1,0 +1,3 @@
+[submodule "src/STAR"]
+	path = src/STAR
+	url = https://github.com/alexdobin/STAR
