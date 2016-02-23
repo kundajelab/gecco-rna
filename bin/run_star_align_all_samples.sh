@@ -7,8 +7,7 @@
 source /users/cprobert/.bashrc
 source /users/cprobert/dev/gecco-rna/bin/project_paths.sh
 
-# Load the star executable
-module load STAR/latest
+# Path for the star executable
 export star_exec="${PROJECT_BIN}STAR"
 
 # Alignment output directory
@@ -18,12 +17,11 @@ mkdir -p ${align_output_basedir}
 for batchdir in $PROJECT_READS_BATCH_DIR_NAMES; do
     export seq_dir="${PROJECT_READS_BASE_DIR}${batchdir}/"
     export align_output_base="${align_output_basedir}${batchdir}_"
-    mkdir -p ${align_output_base}
 
     export seqfiles=$(ls ${seq_dir}*R1.fastq.gz | sed "s/1.fastq.gz//")
 
     parallel -P 25% \
-        '${kallisto_path} quant \
+        '${star_exec} quant \
             -i ${kallisto_idx} \
             -o ${output_dir}{/} \
             -b 100 \
