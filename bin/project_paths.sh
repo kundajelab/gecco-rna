@@ -24,7 +24,7 @@ export PROJECT_ANALYSIS_BASE_DIR="/mnt/lab_data/kundaje/cprobert/gecco-rna/"
 export PROJECT_ANNOTATION_BASE_DIR="${PROJECT_ANALYSIS_BASE_DIR}/annotation/"
 
 # Reference genome path
-export PROJECT_REF_GENOME_FILE="${PROJECT_ANNOTATION_BASE_DIR}ensembl-GRCh38.p5/Homo_sapiens.GRCh38.dna.primary_assembly.fa"
+export PROJECT_REF_GENOME_FILE="${PROJECT_ANNOTATION_BASE_DIR}gencode-v24-GRCh38-sequence/GRCh38.primary_assembly.genome.fa"
 
 # Genome annotation path
 export PROJECT_REF_ANNOT_FILE="${PROJECT_ANNOTATION_BASE_DIR}/gencode-v24-GRCh38.p5/gencode.v24.annotation.gtf"
