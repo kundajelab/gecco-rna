@@ -10,7 +10,7 @@ source /users/cprobert/dev/gecco-rna/bin/project_paths.sh
 # Path for the star executable
 export star_exec="${PROJECT_BIN}STAR"
 
-${star_exec} quant \
+${star_exec} \
     --runThreadN 8 \
     --runMode genomeGenerate \
     --genomeDir ${PROJECT_STAR_INDEX_DIR} \
