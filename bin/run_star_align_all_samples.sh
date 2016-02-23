@@ -21,12 +21,13 @@ for batchdir in $PROJECT_READS_BATCH_DIR_NAMES; do
     export seqfiles=$(ls ${seq_dir}*R1.fastq.gz | sed "s/1.fastq.gz//")
 
     parallel -P 25% \
-        '${star_exec} quant \
-            -i ${kallisto_idx} \
-            -o ${output_dir}{/} \
-            -b 100 \
-            {}1.fastq.gz \
-            {}2.fastq.gz' \
+        '${star_exec} \
+            --runThreadN 2 \
+            --genomeDir ${PROJECT_STAR_INDEX_DIR} \
+            --readFilesIn {}1.fastq.gz {}1.fastq.gz \
+            --readFilesCommand zcat \
+            --alignIntronMin 20 \
+            --outFileNamePrefix ${align_output_base}{/}
         ::: ${seqfiles}
 
 done

@@ -18,7 +18,7 @@ export PROJECT_BIN="${PROJECT_SOURCE_BASE_DIR}/bin/"
 export PROJECT_SAMPLE_FILE="${PROJECT_SOURCE_BASE_DIR}/data/VM_stats.csv"
 
 # Analysis data directory base path
-export PROJECT_ANALYSIS_BASE_DIR="/srv/persistent/cprobert/projects/GECCO-TWAS/"
+export PROJECT_ANALYSIS_BASE_DIR="/mnt/lab_data/kundaje/cprobert/gecco-rna/"
 
 # Annotation data directory base path
 export PROJECT_ANNOTATION_BASE_DIR="${PROJECT_ANALYSIS_BASE_DIR}/annotation/"
