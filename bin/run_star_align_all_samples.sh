@@ -8,15 +8,15 @@ source /users/cprobert/.bashrc
 source /users/cprobert/dev/gecco-rna/bin/project_paths.sh
 
 # Path for the star executable
-export star_exec="${PROJECT_BIN}STAR"
+export star_exec="${PROJECT_SRC}STAR/source/STAR"
 
 # Star parallelism settings
 # N.B.: total threads used = star_num_threads * star_num_concurrent_alignments
 export star_num_threads=4
-export star_num_concurrent_alignments=2
+export star_num_concurrent_alignments=4
 
 # Alignment output directory
-export align_output_basedir="${PROJECT_ANALYSIS_BASE_DIR}/alignments/"
+export align_output_basedir="${PROJECT_ANALYSIS_BASE_DIR}alignments/"
 mkdir -p ${align_output_basedir}
 
 for batchdir in $PROJECT_READS_BATCH_DIR_NAMES; do
@@ -29,7 +29,7 @@ for batchdir in $PROJECT_READS_BATCH_DIR_NAMES; do
         '${star_exec} \
             --runThreadN ${star_num_threads} \
             --genomeDir ${PROJECT_STAR_INDEX_DIR} \
-            --readFilesIn {}1.fastq.gz {}1.fastq.gz \
+            --readFilesIn {}1.fastq.gz {}2.fastq.gz \
             --readFilesCommand zcat \
             --alignIntronMin 20 \
             --outFileNamePrefix ${align_output_base}{/} \
@@ -38,13 +38,7 @@ for batchdir in $PROJECT_READS_BATCH_DIR_NAMES; do
             --outFilterMultimapNmax 20 \
             --clip3pAdapterSeq AGATCGGAAG \
             --clip3pAdapterMMp 0.1 \
-            --genomeLoad NoSharedMemory \
-            --outSAMunmapped Within \
-
+            --outSAMunmapped Within' \
         ::: ${seqfiles}
 
 done
-
-export fastqc_parse_exec="${PROJECT_SOURCE_BASE_DIR}/bin/fastqc_output_parser.py"
-
-python ${fastqc_parse_exec} ${fastqc_output_dir} ${fastqc_output_summary}
