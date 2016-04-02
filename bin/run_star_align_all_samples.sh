@@ -29,7 +29,7 @@ for batchdir in $PROJECT_READS_BATCH_DIR_NAMES; do
         '${star_exec} \
             --runThreadN ${star_num_threads} \
             --genomeDir ${PROJECT_STAR_INDEX_DIR} \
-            --readFilesIn {}1.fastq.gz {}1.fastq.gz \
+            --readFilesIn {}1.fastq.gz {}2.fastq.gz \
             --readFilesCommand zcat \
             --alignIntronMin 20 \
             --outFileNamePrefix ${align_output_base}{/} \
@@ -40,11 +40,7 @@ for batchdir in $PROJECT_READS_BATCH_DIR_NAMES; do
             --clip3pAdapterMMp 0.1 \
             --genomeLoad NoSharedMemory \
             --outSAMunmapped Within \
-
+            --outFilterMismatchNoverLmax 0.1' \
         ::: ${seqfiles}
 
 done
-
-export fastqc_parse_exec="${PROJECT_SOURCE_BASE_DIR}/bin/fastqc_output_parser.py"
-
-python ${fastqc_parse_exec} ${fastqc_output_dir} ${fastqc_output_summary}
