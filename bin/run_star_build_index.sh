@@ -8,10 +8,10 @@ source /users/cprobert/.bashrc
 source /users/cprobert/dev/gecco-rna/bin/project_paths.sh
 
 # Path for the star executable
-export star_exec="${PROJECT_BIN}STAR"
+export star_exec="${PROJECT_SRC}STAR/source/STAR"
 
 ${star_exec} \
-    --runThreadN 8 \
+    --runThreadN 16 \
     --runMode genomeGenerate \
     --genomeDir ${PROJECT_STAR_INDEX_DIR} \
     --genomeFastaFiles ${PROJECT_REF_GENOME_FILE} \
