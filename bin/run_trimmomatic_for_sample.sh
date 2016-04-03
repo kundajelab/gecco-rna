@@ -46,7 +46,7 @@ fi
 export dir_base="$(dirname ${R1PATH})"
 export fname_prefix="$(basename ${R1PATH} | grep -oE '(gc_|VM)([0-9]+)([-_ACGTL0-9]*)([ACGTL0-9])')"
 export UNIQ_FNAME="$(basename ${dir_base})_${fname_prefix}"
-export LOGPATH="${PROJECT_LOG_DIR}/${UNIQ_FNAME}.log.txt"
+export LOGPATH="${PROJECT_TRIM_LOG_DIR}/${UNIQ_FNAME}.log.txt"
 
 export TIMATIC_SRC_DIR="${PROJECT_SRC}/Trimmomatic/Trimmomatic-0.36/"
 export TRIMATIC_JAR="${TIMATIC_SRC_DIR}trimmomatic-0.36.jar"
