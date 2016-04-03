@@ -35,3 +35,9 @@ export PROJECT_REF_ANNOT_FILE="${PROJECT_ANNOTATION_BASE_DIR}gencode-v24-GRCh38.
 
 # Star index directory
 export PROJECT_STAR_INDEX_DIR="${PROJECT_ANALYSIS_BASE_DIR}indexes/STAR/"
+
+# Scratch directory (for intermediate files only)
+export PROJECT_SCRATCH_BASE="/srv/gsfs0/scratch/cprobert/gecco-rna/"
+
+# Trimmed reads scratch directory
+export PROJECT_TRIM_SCRATCH="/srv/gsfs0/scratch/cprobert/gecco-rna/trimmed/"
