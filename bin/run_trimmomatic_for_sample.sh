@@ -2,15 +2,21 @@
 
 #
 # Run trimmomatic on a single pair of fastqs provided with flags --R1, --R2
+# Output files are named with the globally unique filename base --outputbase
 #
-# Usage: run_trimmomatic_for_sample --R1 {R1_path} --R2 {R2_path}
+# Usage: run_trimmomatic_for_sample --R1 {R1_path} --R2 {R2_path} --outputbase {output_fname_base}
 #
 
-source /home/cprobert/.bashrc
-source /srv/gsfs0/projects/kundaje/users/cprobert/gecco-rna/bin/project_paths.sh
+# Source project_paths.sh on any host
+FILE=/srv/gsfs0/projects/kundaje/users/cprobert/gecco-rna/bin/project_paths.sh && test -f $FILE && source $FILE
+FILE=/users/cprobert/dev/gecco-rna/bin/project_paths.sh && test -f $FILE && source $FILE
+FILE=/Users/chris/dev/gecco-rna/bin/project_paths.sh && test -f $FILE && source $FILE
+if [ -z "$PROJECT_SOURCE_BASE_DIR" ]; then
+    echo "ERROR: did not source project_paths.sh"
+    exit 1
+fi
 
 module load java/latest
-
 
 while [[ $# > 1 ]]
 do
@@ -23,6 +29,10 @@ case $key in
     ;;
     --R2)
     R2PATH="$2"
+    shift
+    ;;
+    --outputbase)
+    OUTFNAMEBASE="$2"
     shift
     ;;
     *)
@@ -43,10 +53,13 @@ then
   exit 1
 fi
 
-export dir_base="$(dirname ${R1PATH})"
-export fname_prefix="$(basename ${R1PATH} | grep -oE '(gc_|VM)([0-9]+)([-_ACGTL0-9]*)([ACGTL0-9])')"
-export UNIQ_FNAME="$(basename ${dir_base})_${fname_prefix}"
-export LOGPATH="${PROJECT_TRIM_LOG_DIR}/${UNIQ_FNAME}.log.txt"
+if [ -z "$OUTFNAMEBASE" ]
+then
+  echo "error: output filename not set (--outputbase)"
+  exit 1
+fi
+
+export LOGPATH="${PROJECT_TRIM_LOG_DIR}/${OUTFNAMEBASE}.log.txt"
 
 export TIMATIC_SRC_DIR="${PROJECT_SRC}/Trimmomatic/Trimmomatic-0.36/"
 export TRIMATIC_JAR="${TIMATIC_SRC_DIR}trimmomatic-0.36.jar"
@@ -54,7 +67,7 @@ export TRIMATIC_REF_FA="${TIMATIC_SRC_DIR}adapters/TruSeq3-PE-2.fa"
 export JAVA_EXEC="java"
 
 export OUTPUT_DIR="${PROJECT_TRIM_SCRATCH}"
-export OUTPUT_BASE="${OUTPUT_DIR}${UNIQ_FNAME}.fq.gz"
+export OUTPUT_BASE="${OUTPUT_DIR}${OUTFNAMEBASE}.fq.gz"
 
 export TRIMATIC_EXEC="${JAVA_EXEC} -jar ${TRIMATIC_JAR}"
 export TRIMATIC_EXEC="${TRIMATIC_EXEC} PE"
