@@ -65,7 +65,7 @@ export star_exec="${PROJECT_SRC}STAR/source/STAR"
 export star_num_threads=8
 
 # Alignment output directory
-export align_output_basedir="${PROJECT_ANALYSIS_BASE_DIR}alignments/"
+export align_output_basedir="${PROJECT_ALIGNED_ROUND_1}"
 mkdir -p ${align_output_basedir}
 export align_output_base="${align_output_basedir}${OUTFNAMEBASE}"
 
@@ -79,5 +79,4 @@ ${star_exec} \
     --outSAMtype BAM SortedByCoordinate \
     --genomeLoad NoSharedMemory \
     --outFilterMultimapNmax 20 \
-    --genomeLoad NoSharedMemory \
     --outFilterMismatchNoverLmax 0.1

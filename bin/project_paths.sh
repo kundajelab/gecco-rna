@@ -15,11 +15,11 @@ export HOSTNAME="$(hostname)"
 if [ "$HOSTNAME" = "nandi" ]; then
     export PROJECT_READS_BASE_DIR="/srv/persistent/pgreens/projects/gecco/data/rna_seq/Casey_RNA-Seq_Batches_1-5/casey_rnaseq_case/"
     export PROJECT_ANALYSIS_BASE_DIR="/srv/scratch/cprobert/gecco-rna/"
-    export PROJECT_SCRATCH_BASE="/srv/scratch/cprobert/gecco-rna/scratch/"
+    export PROJECT_SCRATCH_BASE="/srv/scratch/cprobert/gecco-rna/"
     export PROJECT_SOURCE_BASE_DIR="/users/cprobert/dev/gecco-rna/"
 elif (echo $HOSTNAME | grep -q scg); then
     export PROJECT_READS_BASE_DIR="/srv/gsfs0/projects/kundaje/users/cprobert/data/casey_rnaseq_case/"
-    export PROJECT_ANALYSIS_BASE_DIR="/srv/gsfs0/projects/kundaje/users/cprobert/data/gecco-rna-analysis/"
+    export PROJECT_ANALYSIS_BASE_DIR="/srv/gsfs0/scratch/cprobert/gecco-rna/"
     export PROJECT_SCRATCH_BASE="/srv/gsfs0/scratch/cprobert/gecco-rna/"
     export PROJECT_SOURCE_BASE_DIR="/srv/gsfs0/projects/kundaje/users/cprobert/gecco-rna/"
 elif (uname | grep -q Darwin); then
@@ -40,7 +40,7 @@ fi;
 export PROJECT_READS_BATCH_DIR_NAMES=$(ls ${PROJECT_READS_BASE_DIR} | grep batch*)
 
 #
-# ANALYSIS DIRECOTRY STRUCTURE
+# ANALYSIS SOURCE CODE DIRECOTRY STRUCTURE
 #
 
 # Base directory for project executable files
@@ -68,12 +68,11 @@ export PROJECT_REF_ANNOT_FILE="${PROJECT_ANNOTATION_BASE_DIR}gencode-v24-GRCh38.
 # Star index directory
 export PROJECT_STAR_INDEX_DIR="${PROJECT_ANALYSIS_BASE_DIR}indexes/STAR/"
 
-#
-# TRIMMING SCRATCH PATHS
-#
-
-# Trimmed reads scratch directory
-export PROJECT_TRIM_SCRATCH="${PROJECT_SCRATCH_BASE}trimmed/"
+# Trimmed reads direcotry
+export PROJECT_TRIMMED_DIR="${PROJECT_ANALYSIS_BASE_DIR}trimmed/"
 
 # Trimming logging directory
-export PROJECT_TRIM_LOG_DIR="${PROJECT_SCRATCH_BASE}trimming-logs/"
+export PROJECT_TRIM_LOG_DIR="${PROJECT_ANALYSIS_BASE_DIR}trimming_logs/"
+
+# Aligned round 1 output direcotry
+export PROJECT_ALIGNED_ROUND_1="${PROJECT_ANALYSIS_BASE_DIR}aligned/round_1/"

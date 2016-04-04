@@ -59,6 +59,7 @@ then
   exit 1
 fi
 
+mkdir -p ${PROJECT_TRIM_LOG_DIR}
 export LOGPATH="${PROJECT_TRIM_LOG_DIR}/${OUTFNAMEBASE}.log.txt"
 
 export TIMATIC_SRC_DIR="${PROJECT_SRC}/Trimmomatic/Trimmomatic-0.36/"
@@ -66,8 +67,8 @@ export TRIMATIC_JAR="${TIMATIC_SRC_DIR}trimmomatic-0.36.jar"
 export TRIMATIC_REF_FA="${TIMATIC_SRC_DIR}adapters/TruSeq3-PE-2.fa"
 export JAVA_EXEC="java"
 
-export OUTPUT_DIR="${PROJECT_TRIM_SCRATCH}"
-export OUTPUT_BASE="${OUTPUT_DIR}${OUTFNAMEBASE}.fq.gz"
+mkdir -p ${PROJECT_TRIMMED_DIR}
+export OUTPUT_BASE="${PROJECT_TRIMMED_DIR}${OUTFNAMEBASE}.fq.gz"
 
 export TRIMATIC_EXEC="${JAVA_EXEC} -jar ${TRIMATIC_JAR}"
 export TRIMATIC_EXEC="${TRIMATIC_EXEC} PE"
